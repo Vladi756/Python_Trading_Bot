@@ -16,7 +16,7 @@ The bot has functions which make it more modular as well as dynamic. The functio
 
 The user specifies which stock and the quantity of stock they wish to buy/sell in the function call itself. 
 
-```
+```python
 # Buy function to buy certain amount of stock
 def buy(quantity, stock) :
     # Buy Stock through API
@@ -31,8 +31,9 @@ def buy(quantity, stock) :
 
 The above is the buy function the bot uses. 
 
+## 3. Trading Strategy
 
-
+The bot calculates the 5 day moving average of the stock it considers. If the moving average exceeds the close price, it buys 1 share, otherwise, it will sell one share. 
 
 
 
