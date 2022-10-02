@@ -15,6 +15,9 @@ API = tradeapi.REST(key_id = API_KEY, secret_key= API_SEC, base_url= BASE_URL)
 # tracks the S&P 500. 
 symb = 'SPY'
 
+# Default value of position held
+pos_held = False
+
 # Modularizing buying and selling stock by creating functions to 
 # make the API calls to buy/sell dynamically - dependent on user input. 
 
@@ -51,3 +54,41 @@ def getData():
     
     # Convert list to numpy array
     close_list = np.array(close_prices_list, dtype=np.float64)
+
+# Implementing Strategy 
+
+while True: 
+    # Let user know the bot is fetching Market data
+    print("")
+    print("Fetching Price...")
+
+    # Fetch Data by invoking the getData function 
+    close_prices_list = getData()
+
+    # Calculate moving average of Data
+    movingAverage = np.mean(close_prices_list)
+    # Last observation from Market data
+    last_price = close_prices_list[4]
+
+    print("Moving Average: " + str(movingAverage))
+    print("Las Price:" + str(last_price))
+
+    # This algorithm buys stock when the moving average crosses the most
+    # recent closing price. 
+
+    # Buy when moving averge is at least 10 cents below the last price
+    if movingAverage + 0.1 < last_price and not pos_held:
+        print("Buying Stock...")
+        # Invokes function with dynamic values, function performs API call
+        buy(1, symb)
+        pos_held = True  # Since we now own stock
+    
+    # If the moving average is at least 10 cents above the last price and we own stock
+    elif movingAverage - 0.1 > last_price and pos_held:
+        print("Selling Stock...")
+        # Same invocation, except now it's selling 
+        sell(1, symb)
+        pos_held = False
+    
+    # To let the prices update, sleep, and then run again
+    time.sleep(60)
