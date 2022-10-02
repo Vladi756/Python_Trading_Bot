@@ -16,7 +16,7 @@ The bot has functions which make it more modular as well as dynamic. The functio
 
 The user specifies which stock and the quantity of stock they wish to buy/sell in the function call itself. 
 
-`
+```
 # Buy function to buy certain amount of stock
 def buy(quantity, stock) :
     # Buy Stock through API
@@ -27,7 +27,7 @@ def buy(quantity, stock) :
         type = 'market',
         time_in_force = 'gtc' # Good 'til Cancelled 
 )
-`
+```
 
 The above is the buy function the bot uses. 
 
