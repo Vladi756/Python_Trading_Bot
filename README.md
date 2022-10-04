@@ -29,7 +29,7 @@ def buy(quantity, stock) :
 )
 ```
 
-The above is the buy function the bot uses. 
+The above is the buy function the bot uses. It invokes the corresponding API call. 
 
 ## 3. Trading Strategy
 
